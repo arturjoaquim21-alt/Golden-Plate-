@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden Plate — Restaurante de Alta Gastronomia · Pemba</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --noir: #080704;
+  --deep: #100e09;
+  --card: #181410;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim: #8a6e30;
+  --cream: #f5ede0;
+  --muted: #9e8e7a;
+  --border: rgba(201,168,76,0.18);
+  --red: #8b1a1a;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--noir); color: var(--cream); font-family: 'Tenor Sans', sans-serif; overflow-x: hidden; }
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 900; opacity: 0.5;
+}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--noir); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 5rem;
+  transition: background .4s, border .4s;
+}
+nav.scrolled { background: rgba(8,7,4,.93); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 300; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; text-decoration: none; }
+.nav-logo span { font-style: italic; color: var(--cream); }
+.nav-links { display: flex; gap: 2.2rem; list-style: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; transition: color .3s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-btn { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: .55rem 1.5rem; font-family: 'Tenor Sans', sans-serif; font-size: .67rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: all .3s; text-decoration: none; }
+.nav-btn:hover { background: var(--gold); color: var(--noir); }
+
+/* ── HERO ── */
+#hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 50% 40%, rgba(201,168,76,.09) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 85%, rgba(201,168,76,.05) 0%, transparent 60%),
+    linear-gradient(175deg, #0a0805 0%, #111009 55%, #080704 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(201,168,76,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 0%, transparent 75%);
+}
+.hero-content { text-align: center; position: relative; z-index: 2; animation: fadeUp 1.2s ease both; }
+.hero-eyebrow {
+  font-size: .66rem; letter-spacing: .45em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; gap: 1rem;
+}
+.hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 36px; height: 1px; background: var(--gold-dim); }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.8rem, 9.5vw, 9rem); font-weight: 300; line-height: .9; letter-spacing: -.01em; margin-bottom: 1.2rem; }
+.hero-title em { font-style: italic; color: var(--gold); display: block; }
+.hero-sub { font-size: .78rem; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); margin-bottom: 3.5rem; }
+.hero-cta { display: inline-flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center; }
+.btn-gold { background: var(--gold); color: var(--noir); border: none; padding: 1rem 2.4rem; font-family: 'Tenor Sans', sans-serif; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: all .3s; text-decoration: none; display: inline-block; }
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--cream); border: 1px solid rgba(245,237,224,.3); padding: 1rem 2.4rem; font-family: 'Tenor Sans', sans-serif; font-size: .7rem; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; transition: all .3s; text-decoration: none; display: inline-block; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .5rem; color: var(--gold-dim); font-size: .58rem; letter-spacing: .3em; text-transform: uppercase; animation: fadeUp 2s 1.2s ease both; }
+.scroll-line { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--gold-dim), transparent); animation: dropLine 2s infinite; }
+
+/* ── SECTIONS ── */
+section { padding: 7rem 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+.sec-label { font-size: .6rem; letter-spacing: .45em; text-transform: uppercase; color: var(--gold); margin-bottom: .9rem; display: flex; align-items: center; gap: .9rem; }
+.sec-label::after { content: ''; flex: 1; max-width: 55px; height: 1px; background: var(--gold-dim); }
+.sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.1rem, 4.5vw, 3.8rem); font-weight: 300; line-height: 1.1; margin-bottom: 1.4rem; }
+.sec-title em { font-style: italic; color: var(--gold); }
+.divider { width: 55px; height: 1px; background: linear-gradient(to right, var(--gold-dim), transparent); margin: 2rem 0; }
+
+/* ── STORY ── */
+#story { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+.story-text p { color: var(--muted); line-height: 1.95; font-size: .88rem; margin-bottom: 1.2rem; }
+.story-stats { display: flex; gap: 3rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+.stat-n { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 300; color: var(--gold); line-height: 1; }
+.stat-l { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
+.story-visual { position: relative; height: 520px; }
+.vis-main {
+  position: absolute; top: 0; right: 0; width: 82%; height: 88%;
+  overflow: hidden; border: 1px solid var(--border);
+}
+.vis-main img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.85) sepia(.15); transition: transform .6s; }
+.vis-main:hover img { transform: scale(1.04); }
+.vis-main::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,7,4,.5) 0%, transparent 50%); }
+.vis-badge {
+  position: absolute; bottom: 0; left: 0; width: 44%; background: var(--card);
+  border: 1px solid var(--border); padding: 2rem; text-align: center;
+}
+.badge-n { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; color: var(--gold); line-height: 1; }
+.badge-l { font-size: .6rem; letter-spacing: .28em; text-transform: uppercase; color: var(--muted); margin-top: .4rem; }
+
+/* ── MENU ── */
+#menu { background: var(--deep); }
+.menu-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem; }
+.tab-bar { display: flex; border: 1px solid var(--border); }
+.tab { padding: .65rem 1.5rem; font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; cursor: pointer; background: transparent; color: var(--muted); border: none; font-family: 'Tenor Sans', sans-serif; transition: all .3s; border-right: 1px solid var(--border); }
+.tab:last-child { border-right: none; }
+.tab.active, .tab:hover { background: var(--gold); color: var(--noir); }
+.menu-panel { display: none; }
+.menu-panel.active { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.m-item { background: var(--deep); padding: 2rem; transition: background .3s; }
+.m-item:hover { background: var(--card); }
+.m-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: .6rem; }
+.m-name { font-family: 'Cormorant Garamond', serif; font-size: 1.18rem; font-weight: 400; line-height: 1.2; }
+.m-price { font-size: .83rem; color: var(--gold); white-space: nowrap; margin-left: .8rem; font-weight: 500; }
+.m-desc { font-size: .77rem; color: var(--muted); line-height: 1.72; }
+.m-tag { display: inline-block; margin-top: .75rem; font-size: .56rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold-dim); border: 1px solid var(--gold-dim); padding: .12rem .45rem; }
+
+/* ── GALLERY ── */
+#gallery { }
+.gallery-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 3.5rem; }
+.gallery-sub { color: var(--muted); font-size: .87rem; line-height: 1.9; }
+.g-grid { display: grid; grid-template-columns: repeat(4,1fr); grid-template-rows: 230px 230px; gap: 6px; }
+.g-cell { overflow: hidden; position: relative; cursor: pointer; }
+.g-cell:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+.g-cell:nth-child(4) { grid-column: span 2; }
+.g-inner { width: 100%; height: 100%; transition: transform .6s ease; position: relative; overflow: hidden; }
+.g-cell:hover .g-inner { transform: scale(1.05); }
+.g-inner img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.8) sepia(.12); }
+.g-inner::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,7,4,.55) 0%, transparent 55%); }
+.g-overlay { position: absolute; inset: 0; background: rgba(8,7,4,.45); display: flex; align-items: flex-end; padding: 1.4rem; opacity: 0; transition: opacity .3s; }
+.g-cell:hover .g-overlay { opacity: 1; }
+.g-cap { font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+
+/* ── TESTIMONIALS ── */
+#testimonials { background: var(--deep); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.testi-h { text-align: center; margin-bottom: 4rem; }
+.testi-h .sec-label { justify-content: center; }
+.testi-h .sec-label::after { display: none; }
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.t-card { background: var(--deep); padding: 2.4rem; transition: background .3s; }
+.t-card:hover { background: var(--card); }
+.stars { color: var(--gold); font-size: .85rem; letter-spacing: .08em; margin-bottom: 1.4rem; }
+.t-text { font-family: 'Cormorant Garamond', serif; font-size: 1.08rem; font-style: italic; font-weight: 300; line-height: 1.72; color: var(--cream); margin-bottom: 1.7rem; }
+.t-author { display: flex; align-items: center; gap: 1rem; }
+.t-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: .95rem; color: var(--gold); }
+.t-name { font-size: .78rem; color: var(--cream); }
+.t-loc { font-size: .62rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-top: .12rem; }
+
+/* ── CONTACT ── */
+#contact { }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 6rem; align-items: start; }
+.c-detail { display: flex; align-items: flex-start; gap: 1.1rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+.c-detail:last-child { border-bottom: none; }
+.c-icon { width: 34px; height: 34px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .85rem; color: var(--gold); flex-shrink: 0; }
+.c-label { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: .28rem; }
+.c-val { font-size: .85rem; color: var(--cream); line-height: 1.65; }
+.c-form { display: flex; flex-direction: column; gap: 1rem; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.f-group { display: flex; flex-direction: column; gap: .38rem; }
+.f-label { font-size: .58rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.f-input, .f-textarea, .f-select {
+  background: var(--card); border: 1px solid var(--border); color: var(--cream);
+  padding: .88rem 1rem; font-family: 'Tenor Sans', sans-serif; font-size: .8rem;
+  transition: border-color .3s; outline: none; width: 100%; -webkit-appearance: none;
+}
+.f-input:focus, .f-textarea:focus, .f-select:focus { border-color: var(--gold); }
+.f-textarea { resize: vertical; min-height: 110px; }
+.f-select option { background: var(--card); }
+.f-submit { background: var(--gold); color: var(--noir); border: none; padding: 1.05rem 2.2rem; font-family: 'Tenor Sans', sans-serif; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; cursor: pointer; transition: all .3s; align-self: flex-start; margin-top: .4rem; }
+.f-submit:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+/* ── FOOTER ── */
+footer { background: var(--noir); border-top: 1px solid var(--border); padding: 4rem 0 2rem; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
+.f-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; letter-spacing: .18em; color: var(--gold); text-transform: uppercase; margin-bottom: .9rem; }
+.f-brand span { font-style: italic; color: var(--cream); }
+.f-desc { font-size: .78rem; color: var(--muted); line-height: 1.85; margin-bottom: 1.4rem; }
+.socials { display: flex; gap: .7rem; }
+.soc { width: 32px; height: 32px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: .72rem; color: var(--muted); text-decoration: none; transition: all .3s; }
+.soc:hover { border-color: var(--gold); color: var(--gold); }
+.f-col-title { font-size: .58rem; letter-spacing: .32em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; }
+.f-links { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+.f-links a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .3s; }
+.f-links a:hover { color: var(--gold); }
+.f-hours { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+.f-hours li { display: flex; justify-content: space-between; font-size: .76rem; color: var(--muted); }
+.f-hours .day { color: var(--cream); }
+.f-bottom { display: flex; justify-content: space-between; align-items: center; font-size: .63rem; color: var(--muted); }
+.f-bottom a { color: var(--gold-dim); text-decoration: none; }
+.ornament { display: flex; align-items: center; gap: 1rem; color: var(--gold-dim); margin: 2.5rem 0; font-size: .65rem; letter-spacing: .4em; }
+.orn-line { flex: 1; max-width: 70px; height: 1px; background: var(--border); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:none; } }
+@keyframes dropLine { 0%,100% { transform:scaleY(1); transform-origin:top; } 50% { transform:scaleY(.35); } }
+.reveal { opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity:1; transform:none; }
+.reveal-d1 { transition-delay: .1s; }
+.reveal-d2 { transition-delay: .2s; }
+.reveal-d3 { transition-delay: .3s; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav { padding:1.2rem 1.5rem; }
+  .nav-links, .nav-btn { display:none; }
+  .container { padding:0 1.5rem; }
+  section { padding:4.5rem 0; }
+  .story-grid,.contact-grid,.gallery-intro,.footer-grid { grid-template-columns:1fr; gap:2.5rem; }
+  .story-visual { height:280px; }
+  .menu-panel.active { grid-template-columns:1fr; }
+  .g-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
+  .g-cell:nth-child(1),.g-cell:nth-child(4) { grid-column:span 1; }
+  .g-cell { height:160px; }
+  .testi-grid { grid-template-columns:1fr; }
+  .f-row { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Golden <span>Plate</span></a>
+  <ul class="nav-links">
+    <li><a href="#story">A Nossa História</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#gallery">Galeria</a></li>
+    <li><a href="#testimonials">Avaliações</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+  <a href="#contact" class="nav-btn">Reservar Mesa</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Pemba, Moçambique · Desde 2020</div>
+    <h1 class="hero-title">
+      Golden<br><em>Plate</em>
+    </h1>
+    <p class="hero-sub">Alta Gastronomia Moçambicana · Sabores do Índico</p>
+    <div class="hero-cta">
+      <a href="#menu" class="btn-gold">Ver o Menu</a>
+      <a href="#contact" class="btn-ghost">Fazer Reserva</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Explorar
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text reveal">
+        <div class="sec-label">A Nossa História</div>
+        <h2 class="sec-title">Nascidos no <em>coração</em> de Pemba</h2>
+        <div class="divider"></div>
+        <p>O Golden Plate nasceu em 2020 da paixão de dois irmãos  — Ivan e Dalton  Canari — que cresceram entre as panelas da avó em nacala e os mercados de peixe fresco da Baixa. O sonho era simples: levar a riqueza da cozinha moçambicana a uma mesa elegante, sem perder a alma da tradição.</p>
+        <p>Instalados numa Praia, combinamos a sofisticação da alta gastronomia com os ingredientes mais genuínos do país — camarão do Índico, matapa da Zambézia, cajus do Norte e especiarias que contam séculos de história de comércio entre África, Portugal e o Oriente.</p>
+        <p>Cada prato é uma homenagem. Cada refeição, uma viagem. Bem-vindo ao Golden Plate — onde Moçambique se senta à mesa.</p>
+        <div class="story-stats">
+          <div>
+            <div class="stat-n">5+</div>
+            <div class="stat-l">Anos de história</div>
+          </div>
+          <div>
+            <div class="stat-n">54</div>
+            <div class="stat-l">Pratos da carta</div>
+          </div>
+          <div>
+            <div class="stat-n">4.9★</div>
+            <div class="stat-l">Avaliação média</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-visual reveal reveal-d1">
+        <div class="vis-main">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80" alt="Interior do restaurante Golden Plate">
+        </div>
+        <div class="vis-badge">
+          <div class="badge-n">Nº1</div>
+          <div class="badge-l">Restaurante em Pemba</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="container">
+    <div class="menu-header reveal">
+      <div>
+        <div class="sec-label">Gastronomia Moçambicana</div>
+        <h2 class="sec-title">O nosso <em>Menu</em></h2>
+      </div>
+      <div class="tab-bar">
+        <button class="tab active" onclick="switchTab('entradas',this)">Entradas</button>
+        <button class="tab" onclick="switchTab('principais',this)">Pratos Principais</button>
+        <button class="tab" onclick="switchTab('sobremesas',this)">Sobremesas & Café</button>
+      </div>
+    </div>
+
+    <!-- ENTRADAS -->
+    <div id="entradas" class="menu-panel active reveal">
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Chamussas de Camarão</div><div class="m-price">280 MZN</div></div>
+        <div class="m-desc">Pastéis crocantes em forma de triângulo recheados com camarão do Índico temperado com coentro, alho e piri-piri suave. Servidos com molho de amendoim.</div>
+        <span class="m-tag">Clássico Moçambicano</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Carpaccio de Atum do Índico</div><div class="m-price">420 MZN</div></div>
+        <div class="m-desc">Finas fatias de atum fresco local marinado em citrinos, gengibre, gergelim negro e um fio de azeite de cajueiro. Acabamento de flor de sal.</div>
+        <span class="m-tag">Mar & Sabor</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Sopa de Coco & Caril</div><div class="m-price">320 MZN</div></div>
+        <div class="m-desc">Caldo cremoso de leite de coco com açafrão-da-terra, gengibre e camarões bebé. Servida com pãozinho artesanal de mandioca.</div>
+        <span class="m-tag">Quente & Aromático</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Rissóis de Peixe Fumado</div><div class="m-price">260 MZN</div></div>
+        <div class="m-desc">Rissóis dourados recheados com peixe fumado artesanal, cream cheese e ervas frescas. Acompanham molho de lima com piri-piri.</div>
+        <span class="m-tag">Fusão Portuguesa</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Vieiras Grelhadas</div><div class="m-price">560 MZN</div></div>
+        <div class="m-desc">Vieiras seladas em manteiga noisette, sobre purê de inhame cremoso, chips de banana da terra e espuma de leite de coco.</div>
+        <span class="m-tag">Chef's Choice</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Tábua de Petiscos</div><div class="m-price">480 MZN</div></div>
+        <div class="m-desc">Seleção de chamussas, rissóis, camarões grelhados, azeitonas marinadas e pão de mandioca. Ideal para partilhar.</div>
+        <span class="m-tag">Para Partilhar</span>
+      </div>
+    </div>
+
+    <!-- PRINCIPAIS -->
+    <div id="principais" class="menu-panel">
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Matapa de Camarão Real</div><div class="m-price">680 MZN</div></div>
+        <div class="m-desc">O prato nacional no seu esplendor máximo — folhas de mandioca trituradas com amendoim torrado, alho e leite de coco cremoso, coroadas com camarão gigante do Índico. Servida com arroz basmati e xima.</div>
+        <span class="m-tag">Prato Nacional · Assinatura</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Camarão Piri-Piri Golden</div><div class="m-price">850 MZN</div></div>
+        <div class="m-desc">Camarões tigre grelhados na brasa com molho piri-piri da casa (malagueta, alho, limão, paprika e azeite). Acompanha arroz de coco e batatas rústicas.</div>
+        <span class="m-tag">Estrela da Casa</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Caril de Camarão à Zambeziana</div><div class="m-price">720 MZN</div></div>
+        <div class="m-desc">Camarões frescos em molho cremoso de leite de coco, tomate, cebola, cúrcuma e coentro. Influência indiana com alma moçambicana. Servido com arroz de açafrão.</div>
+        <span class="m-tag">Fusão Índica</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Frango à Cafreal</div><div class="m-price">590 MZN</div></div>
+        <div class="m-desc">Frango marinado em pasta verde de coentro, alho, piri-piri e lima de Inhambane, grelhado lentamente até dourar. Originário de Inhambane, símbolo da cozinha do Sul.</div>
+        <span class="m-tag">Inhambane · Tradicional</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Lagosta Grelhada do Bazaruto</div><div class="m-price">1 850 MZN</div></div>
+        <div class="m-desc">Lagosta inteira do Arquipélago do Bazaruto, grelhada na brasa com manteiga de ervas, alho e limão. A mais nobre iguaria dos mares moçambicanos.</div>
+        <span class="m-tag">Premium · Mar Índico</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Polvo Confitado com Xima</div><div class="m-price">760 MZN</div></div>
+        <div class="m-desc">Polvo confitado lentamente em azeite e especiarias, servido com xima tradicional de milho, legumes salteados e vinagrete de piri-piri.</div>
+        <span class="m-tag">Terra & Mar</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Bife de Búfalo à Africana</div><div class="m-price">980 MZN</div></div>
+        <div class="m-desc">Medalhão de búfalo em molho de caju torrado e vinho tinto, servido com batata-doce caramelizada e feijão-verde com amendoim.</div>
+        <span class="m-tag">Caça & Sabor</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Feijoada do Niassa</div><div class="m-price">540 MZN</div></div>
+        <div class="m-desc">Feijão negro cozinhado lentamente com carne de porco, enchidos e legumes da época, ao estilo do Norte de Moçambique. Servida com arroz branco e couve refogada.</div>
+        <span class="m-tag">Conforto · Niassa</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Peixe Grelhado à Moda da Costa</div><div class="m-price">650 MZN</div></div>
+        <div class="m-desc">Peixe fresco do dia grelhado com refogado de tomate, cebola, alho e piri-piri — o refogado tradicional moçambicano. Com arroz e salada da época.</div>
+        <span class="m-tag">Do Mar ao Prato</span>
+      </div>
+    </div>
+
+    <!-- SOBREMESAS -->
+    <div id="sobremesas" class="menu-panel">
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Bolo Polana</div><div class="m-price">220 MZN</div></div>
+        <div class="m-desc">O bolo nacional de Moçambique — base de batata e farinha de caju, textura densa e levemente adocicada. Servido com gelado de baunilha de Madagascar e calda de caramelo.</div>
+        <span class="m-tag">Ícone Nacional</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Pudim de Mandioca & Coco</div><div class="m-price">190 MZN</div></div>
+        <div class="m-desc">Pudim cremoso de mandioca ralada com leite de coco, açúcar mascavado e canela. Sobremesa tradicional das avós, reinventada com apresentação elegante.</div>
+        <span class="m-tag">Tradição da Avó</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Cocada Amarela</div><div class="m-price">175 MZN</div></div>
+        <div class="m-desc">Doce clássico moçambicano de coco ralado com gemas, açúcar e especiarias, de origem portuguesa. Servida com frutas tropicais frescas da época.</div>
+        <span class="m-tag">Doce Português-Africano</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Torta de Manga & Maracujá</div><div class="m-price">210 MZN</div></div>
+        <div class="m-desc">Torta de manga fresca de Inhambane com creme de maracujá, base de biscoito de caju triturado e chantilly de leite de coco.</div>
+        <span class="m-tag">Frutas Tropicais</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Café Especial de Moçambique</div><div class="m-price">95 MZN</div></div>
+        <div class="m-desc">Café de altitude da Província de Manica, torra artesanal lenta, preparado por barista. Notas de chocolate, frutas vermelhas e caramelo. Espresso ou filtro.</div>
+        <span class="m-tag">Café Nacional</span>
+      </div>
+      <div class="m-item">
+        <div class="m-head"><div class="m-name">Doce de Banana & Amendoim</div><div class="m-price">155 MZN</div></div>
+        <div class="m-desc">Banana da terra caramelizada em manteiga e açúcar de cana, sobre creme de amendoim tostado e merengue de lima. Quente e reconfortante.</div>
+        <span class="m-tag">Sabores do Sul</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="gallery-intro">
+      <div class="reveal">
+        <div class="sec-label">O Nosso Espaço</div>
+        <h2 class="sec-title">Atmosfera <em>única</em> na Polana</h2>
+        <div class="divider"></div>
+        <p class="gallery-sub">Instalados numa praia, o Golden Plate combina a elegância da arquitectura moçambicana com a bela vista a beira d omar — madeira de pau-preto, tecidos capulanas e iluminação suave que evoca as noites do Índico. Um espaço onde o passado e o presente dialogam à mesa.</p>
+      </div>
+      <div class="ornament reveal reveal-d1">
+        <div class="orn-line"></div> ✦ <div class="orn-line"></div>
+      </div>
+    </div>
+    <div class="g-grid reveal">
+      <!-- Célula grande -->
+      <div class="g-cell">
+        <div class="g-inner">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" alt="Salão principal Golden Plate">
+          <div class="g-overlay"><span class="g-cap">Salão Principal</span></div>
+        </div>
+      </div>
+      <div class="g-cell">
+        <div class="g-inner">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Pratos do Chef">
+          <div class="g-overlay"><span class="g-cap">Alta Gastronomia</span></div>
+        </div>
+      </div>
+      <div class="g-cell">
+        <div class="g-inner">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="Bar e Cocktails">
+          <div class="g-overlay"><span class="g-cap">Bar & Cocktails</span></div>
+        </div>
+      </div>
+      <!-- Célula dupla -->
+      <div class="g-cell">
+        <div class="g-inner">
+          <img src="https://images.unsplash.com/photo-1544025162-d76538b2be5e?w=800&q=80" alt="Camarão e Frutos do Mar">
+          <div class="g-overlay"><span class="g-cap">Frutos do Mar do Índico</span></div>
+        </div>
+      </div>
+      <div class="g-cell">
+        <div class="g-inner">
+          <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&q=80" alt="Terraço ao Anoitecer">
+          <div class="g-overlay"><span class="g-cap">Terraço ao Anoitecer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="testi-h reveal">
+      <div class="sec-label">Avaliações</div>
+      <h2 class="sec-title">O que os nossos <em>convidados</em> dizem</h2>
+    </div>
+    <div class="testi-grid reveal reveal-d1">
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p class="t-text">"A Matapa de Camarão é simplesmente extraordinária. Nunca pensei que um prato tão tradicional pudesse ser apresentado com tanta elegância. O Golden Plate é o orgulho de Pemba."</p>
+        <div class="t-author">
+          <div class="t-avatar">F</div>
+          <div>
+            <div class="t-name">Fátima Muhove</div>
+            <div class="t-loc">Maputo, Moçambique</div>
+          </div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p class="t-text">"Vim de Lisboa especialmente para este restaurante. O Camarão Piri-Piri Golden é o melhor que já provei na minha vida — os sabores do Índico são incomparáveis. Voltarei com certeza."</p>
+        <div class="t-author">
+          <div class="t-avatar">J</div>
+          <div>
+            <div class="t-name">Pedro Ferreira</div>
+            <div class="t-loc">Lisboa, Portugal</div>
+          </div>
+        </div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        <p class="t-text">"O ambiente da Golden Plate é mágico — luzes suaves, música ao vivo e a brisa do Índico. O Frango à Cafreal e o Bolo Polana de sobremesa foram uma experiência inesquecível."</p>
+        <div class="t-author">
+          <div class="t-avatar">A</div>
+          <div>
+            <div class="t-name">Aisha Kumala</div>
+            <div class="t-loc">Joanesburgo, África do Sul</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="sec-label">Reservas & Contacto</div>
+        <h2 class="sec-title">Venha <em>visitar-nos</em></h2>
+        <div class="divider"></div>
+
+        <div class="c-detail">
+          <div class="c-icon">📍</div>
+          <div>
+            <div class="c-label">Morada</div>
+            <div class="c-val">Avenida Eduardo Mondlane<br>Praia do Wimbe, Pemba — Moçambique</div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon">📞</div>
+          <div>
+            <div class="c-label">Telefone & WhatsApp</div>
+            <div class="c-val">+258 87/85 123 4567</div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon">✉</div>
+          <div>
+            <div class="c-label">E-mail</div>
+            <div class="c-val">reservas@goldenplate.co.mz</div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon">🕐</div>
+          <div>
+            <div class="c-label">Horário de Funcionamento</div>
+            <div class="c-val">Segunda a Sexta: 07h00  – 20h00<br>Sábado: 07h00 – 23h00 <br>Domingo: 06h00 – 17h00 </div>
+          </div>
+        </div>
+        <div class="c-detail">
+          <div class="c-icon">💳</div>
+          <div>
+            <div class="c-label">Pagamento</div>
+            <div class="c-val">Metical (MZN) · M-Pesa · e-Mola · Visa · Numerário</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d1">
+        <form class="c-form" onsubmit="handleSubmit(event)">
+          <div class="f-row">
+            <div class="f-group">
+              <label class="f-label">Nome Completo</label>
+              <input type="text" class="f-input" placeholder="O seu nome">
+            </div>
+            <div class="f-group">
+              <label class="f-label">Telefone / WhatsApp</label>
+              <input type="tel" class="f-input" placeholder="+258 8XX XXX XXX">
+            </div>
+          </div>
+          <div class="f-group">
+            <label class="f-label">E-mail</label>
+            <input type="email" class="f-input" placeholder="seu@email.com">
+          </div>
+          <div class="f-row">
+            <div class="f-group">
+              <label class="f-label">Data da Reserva</label>
+              <input type="date" class="f-input">
+            </div>
+            <div class="f-group">
+              <label class="f-label">Hora Preferida</label>
+              <select class="f-select">
+                <option value="">Seleccionar</option>
+                <option>Matabicho — 07h00 - 11h59</option>
+                <option>Almoço — 12h00 - 16h59</option>
+                <option>Jantar — 17h00 - 20h00</option>
+              </select>
+            </div>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Número de Pessoas</label>
+            <select class="f-select">
+              <option value="">Seleccionar</option>
+              <option>1 pessoa</option>
+              <option>2 pessoas</option>
+              <option>3 - pessoas</option>
+              <option>5 – 6 pessoas</option>
+              <option>7 – 10 pessoas</option>
+              <option>Grupo especial (+10)</option>
+            </select>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Mensagem ou Ocasião Especial</label>
+            <textarea class="f-textarea" placeholder="Aniversário, noivado, restrições alimentares, pedidos especiais…"></textarea>
+          </div>
+          <button type="submit" class="f-submit" id="submitBtn">Solicitar Reserva</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand">Golden <span>Plate</span></div>
+        <p class="f-desc">Alta gastronomia moçambicana no coração de Pemba. Do Índico à mesa, com amor e tradição desde 2020.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com" class="soc">ig</div>
+          <a href="https://www.facebook.com" class="soc">fb</a>
+          <a href="https://www.x.com" class="soc">tw</a>
+          <a href="https://www.youtube.com" class="soc">yt</a>
+        </div>
+      </div>
+      <div>
+        <div class="f-col-title">Navegação</div>
+        <ul class="f-links">
+          <li><a href="#story">A Nossa História</a></li>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#gallery">Galeria</a></li>
+          <li><a href="#testimonials">Avaliações</a></li>
+          <li><a href="#contact">Contacto</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title">Horários</div>
+        <ul class="f-hours">
+          <li><span class="day">Segunda – Sexta</span><span>07h–20h</span></li>
+          <li><span class="day">Sábado</span><span>07h–23h</span></li>
+          <li><span class="day">Domingo</span><span>06h–17h</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 Golden Plate · Pemba, Moçambique. Todos os direitos reservados.</span>
+      <span>+258 87/84 123 4567 · <a href="mailto:reservas@goldenplate.co.mz">reservas@goldenplate.co.mz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // NAV scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Menu tabs
+  function switchTab(id, btn) {
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 90);
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => obs.observe(r));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = '✓ Reserva Solicitada — Entraremos em Contacto';
+    btn.style.background = '#2a5e38';
+    btn.style.color = '#f5ede0';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Solicitar Reserva';
+      btn.style.background = '';
+      btn.style.color = '';
+      btn.disabled = false;
+      e.target.reset();
+    }, 4000);
+  }
+</script>
+</body>
+</html>
+
