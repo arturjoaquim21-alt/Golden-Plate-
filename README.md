@@ -123,8 +123,6 @@ Resumindo: **pode usar, copiar, modificar e distribuir livremente**, inclusive p
 
 - Fotografias: [Unsplash](https://unsplash.com) (licença livre)
 - Tipografia: [Google Fonts](https://fonts.google.com)
-- Desenvolvido com [Claude](https://claude.ai) by Anthropic
-
 ---
 
 *Este é um projecto de demonstração. Qualquer semelhança com estabelecimentos reais é mera coincidência.*
